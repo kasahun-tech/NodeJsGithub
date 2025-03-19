@@ -1,0 +1,30 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches: [main]  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4  
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"  
+
+      - name: Install Dependencies
+        run: npm install 
+  deploy:
+    needs: build  
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12  
+        with:
+          heroku_api_key: ${{ HRKU-441c2475-796b-494f-af06-bbb0c23c8249 }}  
+          heroku_app_name: "publicheroku"  
